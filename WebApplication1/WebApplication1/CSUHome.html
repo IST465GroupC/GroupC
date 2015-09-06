@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+
+    <title></title>
+</head>
+<body>
+    <p>Test Text</p>
+            <script type="text/javascript">
+                var imgs1 = new Array("http://cdn8.staztic.com/app/a/105/105903/cleveland-state-university-287989-l-280x280.png", "http://cdn8.staztic.com/app/a/105/105903/cleveland-state-university-287989-l-280x280.png");
+                var lnks1 = new Array("http://www.csuohio.edu/", "http://www.csuohio.edu/engineering/eecs/eecs");
+                var alt1 = new Array();
+                var currentAd1 = 0;
+                var imgCt1 = 2;
+                function cycle1() {
+                    if (currentAd1 == imgCt1) {
+                        currentAd1 = 0;
+                    }
+                    var banner1 = document.getElementById('adBanner1');
+                    var link1 = document.getElementById('adLink1');
+                    banner1.src = imgs1[currentAd1]
+                    banner1.alt = alt1[currentAd1]
+                    document.getElementById('adLink1').href = lnks1[currentAd1]
+                    currentAd1++;
+                }
+                window.setInterval("cycle1()", 5000);
+</script>
+<a href=""http://www.csuohio.edu/"" id="a1" target="_top">
+<img src="http://cdn8.staztic.com/app/a/105/105903/cleveland-state-university-287989-l-280x280.png" id="Img1" border="0" width="468" height="60"></a>
+</body>
+</html>

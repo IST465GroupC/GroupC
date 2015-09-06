@@ -1,0 +1,1 @@
+﻿function img_test() {var img =  }
