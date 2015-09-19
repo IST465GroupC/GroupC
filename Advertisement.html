@@ -123,8 +123,8 @@
             this.y = y;
             this.drawing = true;
             this.explosionFrame = 15;
-            this.width = 200;
-            this.height = 200;
+            this.width = 100;
+            this.height = 100;
         };
 
         Explosion.prototype.getDrawing = function () {
@@ -197,7 +197,7 @@
             sprite.src = 'Images/ComputerVirus3.jpg';
 
             target = new Image();
-            target.src = 'Images/Target.jpg';
+            target.src = 'Images/target-new.png';
 
             explosion = new Image();
             explosion.src = 'Images/explosion.png';
@@ -208,7 +208,7 @@
 
             var i;
 
-            spriteMap = [[6, 120]];
+           spriteMap = [[6, 120]];
            
            
             for (i = 0; i < 3; i++) {
@@ -266,19 +266,29 @@
                 hits += explosions[i].checkHits(sprites);
             }
 
-            if (shots > 0) {
+            if (hits<3) 
+            {
                 accuracy = Math.round((hits / shots) * 100);
-            }
-
-            ctx.fillStyle = "#cfcfcf";
-            ctx.font = "bold 16pt Arial";
-            ctx.fillText("Shots: " + shots + " Hits: " + hits +
+                ctx.fillStyle = "#cfcfcf";
+                ctx.font = "bold 16pt Arial";
+                ctx.fillText("Shots: " + shots + " Hits: " + hits +
                 " Accuracy: " + accuracy + "%", 10, 30);
+            }
+            if(hits===3)
+            {
+                ctx.fillStyle = "#cfcfcf";
+                ctx.font = "bold 48pt Arial";
+                ctx.fillText("Game Over!", 50, 200);
+                ctx.fillStyle = "#cfcfcf";
+                ctx.font = "bold 12pt Arial";
+                ctx.fillText("Fill out our form above to learn more about programming!", 10, 250);
+            }
+            
 
             //Draw target
-            ctx.drawImage(target,0,0, 660, 660,
-            targetX, targetY,
-            75, 75);
+            ctx.drawImage(target,0,0, 100, 100,
+            targetX-75, targetY-75,
+            50, 50);
 
             requestAnimFrame(start);
 
@@ -287,15 +297,15 @@
         function resizeCanvas() {
 
             ctx.canvas.width = 500;
-            ctx.canvas.height = 500;
+            ctx.canvas.height = 400;
 
         }
 
+        //Controls your mouse and target alignment on the page
         function moveTarget(e) {
 
-            e = e; //|| window.event;
-          //  fixPageXY(e);
-            targetX = e.pageX;
+            e = e; 
+            targetX = e.pageX+50;
             targetY = e.pageY;
 
         }
@@ -320,18 +330,16 @@
     <style>
 	#canvas {
 	    position: absolute; 
-        top:auto;
-        left:auto;
+        top:50px;
+        left:0px;
 	    cursor: none;
 	    background-color: green;
 	}
     </style>
 </head>
 <body>
-    <h1>Test Application</h1>
-
-
-        <canvas id="canvas" width="500" height="500"></canvas>
+    <canvas id="canvas" width="500" height="400"></canvas>
+    <p>Want to learn how to program?<a href="CSU-CS-FORM.html">Apply here for more information.</a></p>
     
 </body>
 </html>
