@@ -16,8 +16,8 @@
             this.y = Math.floor((Math.random() * 200) + 1);
             this.mapX = mapX;
             this.mapY = mapY;
-            this.height = 50;
-            this.width = 50;
+            this.height = 10;
+            this.width = 10;
             this.direction = Math.floor((Math.random() * 359));
             this.speed = 20;
             this.canvas = canvas;
@@ -195,10 +195,10 @@
         function loadSprite() {
 
             sprite = new Image();
-            sprite.src = 'Images/ComputerVirus3.jpg';
+            sprite.src = 'Images/Virus1.gif';
 
             target = new Image();
-            target.src = 'Images/target-new.png';
+            target.src = 'Images/Target1.gif';
 
             explosion = new Image();
             explosion.src = 'Images/explosion.png';
@@ -246,7 +246,7 @@
 
         function clearCanvas() {
 
-           ctx.fillStyle = "green";
+           ctx.fillStyle = "black";
            ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
 
         }
@@ -334,7 +334,7 @@
         top:50px;
         left:0px;
 	    cursor: none;
-	    background-color: green;
+	    background-color: black;
 	}
     </style>
 </head>
