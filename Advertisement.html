@@ -19,7 +19,7 @@
             this.height = 50;
             this.width = 50;
             this.direction = Math.floor((Math.random() * 359));
-            this.speed = 20;
+            this.speed = 5;
             this.canvas = canvas;
             this.erratic = (Math.floor((Math.random() * 4) + 1) === 1);
             this.gravitationalPull = 0;
@@ -43,10 +43,8 @@
 
         Virus.prototype.move = function () {
 
-            var delta = 0.2;
-
-            this.x += Math.cos(this.toRad(this.direction)) * delta * this.speed;
-            this.y -= Math.sin(this.toRad(this.direction)) * delta * this.speed;
+            this.x += Math.cos(this.toRad(this.direction)) * this.speed;
+            this.y -= Math.sin(this.toRad(this.direction)) * this.speed;
 
             this.direction += this.gravitationalPull;
 
