@@ -7,49 +7,46 @@
 
         var targetX = 0, targetY = 0, shots = 0, hits = 0, accuracy = 0;
 
-        window.requestAnimFrame = (function () {
+        window.requestAnimFrame = (function () 
+        {
             return window.requestAnimationFrame
         })();
 
-        function Virus(mapX, mapY, x, y, canvas) {
-            this.x = Math.floor((Math.random() * 200) + 1);
-            this.y = Math.floor((Math.random() * 200) + 1);
-            this.height = 50;
-            this.width = 50;
-            this.direction = Math.floor((Math.random() * 359));
-            this.speed = 5;
-            this.canvas = canvas;
-            this.erratic = (Math.floor((Math.random() * 4) + 1) === 1);
-            this.gravitationalPull = 0;
-            this.tick = 0;
-            this.changeAt = Math.floor((Math.random() * 50) + 1);
+        function Virus(mapX, mapY, x, y, canvas) 
+        {
+            this.x = Math.floor((Math.random() * 200) + 1); //determines a random x-coordinate for the virus image
+            this.y = Math.floor((Math.random() * 200) + 1); //determines a random y-coordinate for the virus image
+            this.height = 50; //determines the height of the virus image
+            this.width = 50; //determines the width of the virus image
+            this.drctn = Math.floor((Math.random() * 359)); //determines the direction the virus will move in
+            this.spd = 5; //determines the speed the virus moves at
+            this.canvas = canvas; //assigns the canvas to keep virus images within
             this.hit = false;
         };
 
-        Virus.prototype.draw = function (ctx, sprite) {
-
-            if (this.hit === false) {
-
+        Virus.prototype.draw = function (ctx, sprite) 
+        {
+            if (this.hit === false) 
+            {
                 ctx.drawImage(sprite, 0, 0,
-                       300, 300,
-                       this.getX(), this.getY(),
-                       this.getWidth(), this.getHeight());
+                        300, 300,
+                        this.getX(), this.getY(),
+                        this.getWidth(), this.getHeight());
             }
-
             return this;
         };
 
-        Virus.prototype.move = function () {
+        Virus.prototype.move = function () 
+        {
+            this.x += Math.cos(this.toRad(this.drctn)) * this.spd;
+            this.y -= Math.sin(this.toRad(this.drctn)) * this.spd;
 
-            this.x += Math.cos(this.toRad(this.direction)) * this.speed;
-            this.y -= Math.sin(this.toRad(this.direction)) * this.speed;
-
-            this.direction += this.gravitationalPull;
-
-            if (this.direction < 0) {
-                this.direction += 360;
-            } else if (this.direction > 360) {
-                this.direction -= 360;
+            if (this.drctn < 0) 
+            {
+                this.drctn += 360;
+            } else if (this.drctn > 360) 
+            {
+                this.drctn -= 360;
             }
         };
 
@@ -57,80 +54,81 @@
             return v * 3.14 / 180;
         };
 
-        Virus.prototype.checkBoundaryCollision = function () {
-
-            if (this.x + this.width > this.canvas.width ||
-               this.x < 0) {
-                this.direction = 2 * 0 - this.direction - 180;
-            } else if (this.y < 0 ||
-               this.y + this.height > this.canvas.height) {
-                this.direction = 2 * 90 - this.direction - 180;
-            }
+        Virus.prototype.checkBoundaryCollision = function () 
+        {
+          if (this.x + this.width > this.canvas.width ||
+              this.x < 0) 
+                {
+                this.drctn = 2 * 0 - this.drctn - 180;
+                } else if (this.y < 0 ||
+                this.y + this.height > this.canvas.height) 
+                {
+                this.drctn = 2 * 90 - this.drctn - 180;
+                }
         };
 
-        Virus.prototype.getX = function () {
+        Virus.prototype.getX = function () 
+        {
             return this.x;
         };
 
-        Virus.prototype.getY = function () {
+        Virus.prototype.getY = function () 
+        {
             return this.y;
         };
 
-        Virus.prototype.getWidth = function () {
+        Virus.prototype.getWidth = function () 
+        {
             return this.width;
         };
 
-        Virus.prototype.getHeight = function () {
+        Virus.prototype.getHeight = function () 
+        {
             return this.height;
         };
 
-        Virus.prototype.setHit = function () {
+        Virus.prototype.setHit = function () 
+        {
             this.hit = true;
         };
 
-        Virus.prototype.getHit = function () {
+        Virus.prototype.getHit = function () 
+        {
             return this.hit;
         };
 
-        function Explosion(x, y) {
-
+        function Explosion(x, y) 
+        {
             this.x = x;
             this.y = y;
             this.drawing = true;
-            this.explosionFrame = 15;
+            this.explosionFrame = 10;
             this.width = 100;
             this.height = 100;
         };
 
-        Explosion.prototype.getDrawing = function () {
-
-            return this.drawing;
-
-        };
-
         //Function used to check if a virus has been hit yet
-        Explosion.prototype.checkHits = function (Viruses) {
-
-            if (this.drawing === false) {
+        Explosion.prototype.checkHits = function (Viruses)
+        {
+            if (this.drawing === false) 
+            {
                 return 0;
             }
 
-            var centreX = (this.x - 100) + (this.width / 2),
-               centreY = (this.y - 90) + (this.height / 2),
-               hits = 0;
+            var centreX = (this.x - 75) + (this.width / 2),
+                centreY = (this.y - 75) + (this.height / 2),
+                hits = 0;
 
-            for (i = 0; i < Viruses.length; i++) {
-
+            for (i = 0; i < Viruses.length; i++) 
+            {
                 if (centreX > Viruses[i].getX() &&
-                       centreX < Viruses[i].getX() + Viruses[i].getWidth() &&
-                       centreY > Viruses[i].getY() &&
-                       centreY < Viruses[i].getY() + Viruses[i].getHeight() &&
-                       Viruses[i].getHit() === false) {
-
+                        centreX < Viruses[i].getX() + Viruses[i].getWidth() &&
+                        centreY > Viruses[i].getY() &&
+                        centreY < Viruses[i].getY() + Viruses[i].getHeight() &&
+                        Viruses[i].getHit() === false) 
+                {
                     Viruses[i].setHit();
-
                     hits++;
-
                 }
             }
 
@@ -142,33 +140,25 @@
             if (this.drawing === false) {
                 return this;
             }
-
             try {
-
                 if (this.explosionFrame-- <= 0) {
                     this.drawing = false;
                 }
-
                 //Draw explosion
                 ctx.drawImage(explosion, ((this.explosionFrame % 10) - 1) * 65, 0,
-                       65, 65,
-                       this.x - 100, this.y - 90,
-                       this.width, this.height);
-
+                        65, 65,
+                        this.x - 75, this.y - 75,
+                        this.width, this.height);
             }
             catch (e) {
-
             }
             return this;
-
         };
-
-
 
         var explosions = [], ctx, canvas, sprites = [], sprite = null;
 
-        function loadSprite() {
-
+        function loadSprite() 
+        {
             sprite = new Image();
             sprite.src = 'ComputerVirus6.gif';
 
@@ -177,37 +167,32 @@
 
             explosion = new Image();
             explosion.src = 'Images/explosion.png';
-
-        }
-
-        //Function used to create multiple Virus objects
-        function createViruses() {
-            var i;
-            for (i = 0; i < 3; i++) {
-                sprites.push(createVirus());
-            }
         }
 
         //Function used to intiate a Virus object
         function createVirus() {
             var cur;
             cur = new Virus(50, 50,
-            Math.floor((Math.random() * canvas.width) + 1),
-            Math.floor((Math.random() * canvas.height) + 1),
-            canvas);
+             Math.floor((Math.random() * canvas.width) + 1),
+             Math.floor((Math.random() * canvas.height) + 1),
+             canvas);
             return cur;
         }
 
 
         function init() {
-
+            
             canvas = document.getElementById('canvas');
             ctx = canvas.getContext('2d');
             canvas.onmousemove = moveTarget;
             canvas.onclick = fire;
             resizeCanvas();
             loadSprite();
-            createViruses();
+            var i;
+            for (i = 0; i < 3; i++) 
+            {
+                sprites.push(createVirus());
+            }//loop used to create multiple viruses
         }
 
         //Function used to continuously clear the canvas
@@ -217,29 +202,33 @@
             ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         }
 
-        function start() {
-
+        //Function to play the game
+        function start() 
+        {
             clearCanvas();
 
-            for (i = 0; i < sprites.length; i++) {
+            for (i = 0; i < sprites.length; i++) 
+            {
                 sprites[i].draw(ctx, sprite).move();
                 sprites[i].checkBoundaryCollision();
             }
 
-
-            for (i = 0; i < explosions.length; i++) {
+            for (i = 0; i < explosions.length; i++) 
+            {
                 explosions[i].draw(ctx, explosion);
                 hits += explosions[i].checkHits(sprites);
             }
 
-            if (hits < 3) {
+            if (hits < 3) 
+            {
                 accuracy = Math.round((hits / shots) * 100);
                 ctx.fillStyle = "#cfcfcf";
                 ctx.font = "bold 16pt Arial";
                 ctx.fillText("Shots: " + shots + " Hits: " + hits +
-                   " Accuracy: " + accuracy + "%", 10, 30);
+                    " Accuracy: " + accuracy + "%", 10, 30);
             }
-            if (hits === 3) {
+            if (hits === 3) 
+            {
                 ctx.fillStyle = "#cfcfcf";
                 ctx.font = "bold 48pt Arial";
                 ctx.fillText("Game Over!", 50, 200);
@@ -248,34 +237,29 @@
                 ctx.fillText("Fill out our form above to learn more about programming!", 10, 250);
             }
 
-
             //Draw target
             ctx.drawImage(target, 0, 0, 450, 400,
-               targetX - 75, targetY - 75,
-               100, 100);
+                targetX - 75, targetY - 75,
+                100, 100);
 
             requestAnimFrame(start);
-
         }
 
-        function resizeCanvas() {
-
+        function resizeCanvas()
+        {
             ctx.canvas.width = 500;
             ctx.canvas.height = 400;
-
         }
 
         //Controls your mouse and target alignment on the page
         function moveTarget(e) {
-
             e = e;
             targetX = e.pageX + 50;
             targetY = e.pageY;
-
         }
 
-        function fire() {
-
+        function fire() 
+        {
             explosions.push(new Explosion(targetX, targetY));
             shots++;
         }
@@ -284,11 +268,11 @@
         window.addEventListener('resize', resizeCanvas, false);
 
         // Start the process
-        window.onload = function () {
+        window.onload = function ()
+        {
             init();
             start();
         };
-
 
     </script>
     <style>
