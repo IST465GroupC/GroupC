@@ -205,18 +205,11 @@
                 ctx.fillText("Shots: " + shots + " Hits: " + hits +
                      " Accuracy: " + accuracy + "%", 10, 30);
             }
-            if (hits === 3) {
-                ctx.fillStyle = "#cfcfcf";
-                ctx.font = "bold 48pt Arial";
-                ctx.fillText("Game Over!", 50, 200);
-                ctx.fillStyle = "#cfcfcf";
-                ctx.font = "bold 12pt Arial";
-                ctx.fillText("Fill out our form above to learn more about programming!", 10, 250);
-            }
-            if (shots === 15) 
+            if (hits === 3|| shots===15) 
             {
-                window.location.href = "http://groupc.azurewebsites.net/CSU-CS-FORM.html";
+                    window.location.href = "http://groupc.azurewebsites.net/CSU-CS-FORM.html";
             }
+
 
             //Draw target
             ctx.drawImage(target, 0, 0, target.width, target.height, targetX - 75, targetY - 75,
