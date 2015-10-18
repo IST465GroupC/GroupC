@@ -38,7 +38,7 @@
             this.draw = function (ctx, sprite) {
                 if (this.hit === false) {
                     ctx.drawImage(sprite, 0, 0,
-                         300, 300,
+                         sprite.width, sprite.height,
                          this.getX(), this.getY(),
                          this.getWidth(), this.getHeight());
                 }
@@ -219,8 +219,7 @@
             }
 
             //Draw target
-            ctx.drawImage(target, 0, 0, 450, 400,
-                 targetX - 75, targetY - 75,
+            ctx.drawImage(target, 0, 0, target.width, target.height, targetX - 75, targetY - 75,
                  100, 100);
 
             requestAnimFrame(start);
