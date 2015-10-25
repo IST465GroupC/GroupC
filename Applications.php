@@ -1,13 +1,12 @@
 <?php
 
-$servername = "fpixf1qz9d.database.windows.net,1433";
+$servername = "localhost";
 $username = "GroupC";
 $password = "CSUist465";
-$dbname = "AdGame";
-
+$dbName = "groupc";
 
 // Create connection
-$conn = new mysql_connect($servername, $username, $password, $dbname);
+$conn = new mysql_connect($servername, $username, $password,$dbName);
 // Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
@@ -19,7 +18,7 @@ $email = $_POST['email'];
 $tele = $_POST['telephone'];
 $comments = $_POST['comments'];
 
-$sql = "INSERT into dbo.Applications (First Name, Last Name, Email, Telephone, Comments) VALUES ('$first', '$last', '$email', '$tele', '$comments')";
+$sql = "INSERT into groupc.applications (FirstName, LastName, Email, Telephone, Comments) VALUES ('$first', '$last', '$email', '$tele', '$comments')";
 
 mysql_close($conn);
 
