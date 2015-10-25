@@ -95,11 +95,11 @@
         };
 
 
-        function Explosion(x, y) {
+        function Bang(x, y) {
             this.x = x;
             this.y = y;
             this.drawing = true;
-            this.explosionFrame = 10;
+            this.bangFrame = 10;
             this.width = 100;
             this.height = 100;
 
@@ -126,15 +126,15 @@
                 return hits;
             };
 
-            this.draw = function (ctx, explosion) {
+            this.draw = function (ctx, bang) {
                 if (this.drawing === false) {
                     return this;
                 }
-                    if (this.explosionFrame-- <= 0) {
+                    if (this.bangFrame-- <= 0) {
                         this.drawing = false;
                     }
-                    //Draw explosion
-                    ctx.drawImage(explosion, ((this.explosionFrame % 10) - 1) * 65, 0,
+                    //Draw bang
+                    ctx.drawImage(bang, ((this.bangFrame % 10) - 1) * 65, 0,
                          65, 65,
                          this.x - 75, this.y - 75,
                          this.width, this.height);
@@ -143,7 +143,7 @@
             };
 
 
-        var explosions = [], ctx, canvas, viruses = [], virus = null;
+        var bangs = [], ctx, canvas, viruses = [], virus = null;
 
         function loadSprite() {
             virus = new Image();
@@ -152,8 +152,8 @@
             target = new Image();
             target.src = 'Target.png';
 
-            explosion = new Image();
-            explosion.src = 'Images/explosion.png';
+            bang = new Image();
+            bang.src = 'bang.png';
         }
 
         function init() {
@@ -190,9 +190,9 @@
                 viruses[i].checkBoundaryCollision();
             }
 
-            for (i = 0; i < explosions.length; i++) {
-                explosions[i].draw(ctx, explosion);
-                hits += explosions[i].checkHits(viruses);
+            for (i = 0; i < bangs.length; i++) {
+                bangs[i].draw(ctx, bang);
+                hits += bangs[i].checkHits(viruses);
             }
 
             if (hits < 3) {
@@ -228,7 +228,7 @@
         }
 
         function fire() {
-            explosions.push(new Explosion(targetX, targetY));
+            bangs.push(new Bang(targetX, targetY));
             shots++;
         }
 
