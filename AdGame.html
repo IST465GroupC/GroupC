@@ -35,10 +35,10 @@
             this.canvas = canvas; //assigns the canvas to keep virus images within
             this.hit = false;
 
-            this.draw = function (ctx, sprite) {
+            this.draw = function (ctx, virus) {
                 if (this.hit === false) {
-                    ctx.drawImage(sprite, 0, 0,
-                         sprite.width, sprite.height,
+                    ctx.drawImage(virus, 0, 0,
+                         virus.width, virus.height,
                          this.getX(), this.getY(),
                          this.getWidth(), this.getHeight());
                 }
@@ -130,7 +130,6 @@
                 if (this.drawing === false) {
                     return this;
                 }
-                try {
                     if (this.explosionFrame-- <= 0) {
                         this.drawing = false;
                     }
@@ -140,20 +139,18 @@
                          this.x - 75, this.y - 75,
                          this.width, this.height);
                 }
-                catch (e) {
-                }
                 return this;
             };
-        };
 
-        var explosions = [], ctx, canvas, sprites = [], sprite = null;
+
+        var explosions = [], ctx, canvas, viruses = [], virus = null;
 
         function loadSprite() {
-            sprite = new Image();
-            sprite.src = 'ComputerVirus6.png';
+            virus = new Image();
+            virus.src = 'ComputerVirus6.png';
 
             target = new Image();
-            target.src = 'Virus2.png';
+            target.src = 'Target.png';
 
             explosion = new Image();
             explosion.src = 'Images/explosion.png';
@@ -170,7 +167,7 @@
             var i;
             for (i = 0; i < 3; i++) 
             {
-                sprites.push(new Virus(50, 50,
+                viruses.push(new Virus(50, 50,
               Math.floor((Math.random() * canvas.width) + 1),
               Math.floor((Math.random() * canvas.height) + 1),
               canvas));
@@ -188,14 +185,14 @@
         function start() {
             clearCanvas();
 
-            for (i = 0; i < sprites.length; i++) {
-                sprites[i].draw(ctx, sprite).move();
-                sprites[i].checkBoundaryCollision();
+            for (i = 0; i < viruses.length; i++) {
+                viruses[i].draw(ctx, virus).move();
+                viruses[i].checkBoundaryCollision();
             }
 
             for (i = 0; i < explosions.length; i++) {
                 explosions[i].draw(ctx, explosion);
-                hits += explosions[i].checkHits(sprites);
+                hits += explosions[i].checkHits(viruses);
             }
 
             if (hits < 3) {
