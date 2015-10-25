@@ -106,7 +106,7 @@
             this.checkHits = function (Viruses) {
                 if (this.drawing === false) {
                     return 0;
-                }
+                };
 
                 var centreX = (this.x - 75) + (this.width / 2),
                  centreY = (this.y - 75) + (this.height / 2),
@@ -120,8 +120,8 @@
                          Viruses[i].getHit() === false) {
                         Viruses[i].setHit();
                         hits++;
-                    }
-                }
+                    };
+                };
 
                 return hits;
             };
@@ -129,18 +129,18 @@
             this.draw = function (ctx, bang) {
                 if (this.drawing === false) {
                     return this;
-                }
-                    if (this.bangFrame-- <= 0) {
-                        this.drawing = false;
-                    }
-                    //Draw bang
-                    ctx.drawImage(bang, ((this.bangFrame % 10) - 1) * 65, 0,
+                };
+                if (this.bangFrame-- <= 0) {
+                    this.drawing = false;
+                };
+                //Draw bang
+                ctx.drawImage(bang, ((this.bangFrame % 10) - 1) * 65, 0,
                          65, 65,
                          this.x - 75, this.y - 75,
                          this.width, this.height);
-                }
-                return this;
             };
+            return this;
+        };
 
 
         var bangs = [], ctx, canvas, viruses = [], virus = null;
@@ -154,7 +154,7 @@
 
             bang = new Image();
             bang.src = 'bang.png';
-        }
+        };
 
         function init() {
 
@@ -165,21 +165,20 @@
             resizeCanvas();
             loadSprite();
             var i;
-            for (i = 0; i < 3; i++) 
-            {
+            for (i = 0; i < 3; i++) {
                 viruses.push(new Virus(50, 50,
               Math.floor((Math.random() * canvas.width) + 1),
               Math.floor((Math.random() * canvas.height) + 1),
               canvas));
-            } //loop used to create multiple viruses
-        }
+            }; //loop used to create multiple viruses
+        };
 
         //Function used to continuously clear the canvas
         function clearCanvas() {
 
             ctx.fillStyle = "white";
             ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-        }
+        };
 
         //Function to play the game
         function start() {
@@ -188,12 +187,12 @@
             for (i = 0; i < viruses.length; i++) {
                 viruses[i].draw(ctx, virus).move();
                 viruses[i].checkBoundaryCollision();
-            }
+            };
 
             for (i = 0; i < bangs.length; i++) {
                 bangs[i].draw(ctx, bang);
                 hits += bangs[i].checkHits(viruses);
-            }
+            };
 
             if (hits < 3) {
                 accuracy = Math.round((hits / shots) * 100);
@@ -201,11 +200,10 @@
                 ctx.font = "bold 16pt Arial";
                 ctx.fillText("Shots: " + shots + " Hits: " + hits +
                      " Accuracy: " + accuracy + "%", 10, 30);
-            }
-            if (hits === 3|| shots===15) 
-            {
-                    window.location.href = "http://groupc.azurewebsites.net/CSU-CS-FORM.html";
-            }
+            };
+            if (hits === 3 || shots === 15) {
+                window.location.href = "http://groupc.azurewebsites.net/CSU-CS-FORM.html";
+            };
 
 
             //Draw target
@@ -213,24 +211,24 @@
                  100, 100);
 
             requestAnimFrame(start);
-        }
+        };
 
         function resizeCanvas() {
             ctx.canvas.width = 500;
             ctx.canvas.height = 400;
-        }
+        };
 
         //Controls your mouse and target alignment on the page
         function moveTarget(e) {
             e = e;
             targetX = e.pageX + 50;
             targetY = e.pageY;
-        }
+        };
 
         function fire() {
             bangs.push(new Bang(targetX, targetY));
             shots++;
-        }
+        };
 
         // resize the canvas to fill browser window dynamically
         window.addEventListener('resize', resizeCanvas, false);
