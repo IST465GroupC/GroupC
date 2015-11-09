@@ -6,7 +6,6 @@
         <title></title>
     </head>
     <body>
-        <p>
        <?php
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
@@ -38,12 +37,12 @@ $query = $sql->prepare('INSERT into applications (First, Last, Email, Telephone,
 $query->execute(array($first, $last, $email, $tele, $comments));
 
 
-$query = $sql->prepare('SELECT * FROM applications');
-$query->execute();
+//$query = $sql->prepare('SELECT * FROM applications');
+//$query->execute();
 
-$result = $query->fetchAll();
+//$result = $query->fetchAll();
 
-print_r($result);
+//print_r($result);
 
 //$conn = new mysqli_connect('us-cdbr-azure-east-a.cloudapp.net', 'bfeb7e31e89ee0', '85679ca6');
 //echo($conn);
@@ -68,6 +67,8 @@ print_r($result);
 */
 //mysql_close($conn);
 ?>
-            </p>
+   <h1>Thank You!</h1>
+   <h4>Thank you for your application submission! We look forward to contacting you about our Computer Science Program at Cleveland State University.</h4>
+   <h4>Click <a href="CSU-CS-HOME2.html">here</a> to return to our Computer Science homepage.</h4>
     </body>
 </html>
