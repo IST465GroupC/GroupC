@@ -10,11 +10,12 @@
         left:0px;
 	    cursor: none;
 	    background-color: white;
+        border: 5px solid black;
 	}
     </style>
 </head>
 <body>
-    <canvas id="canvas" width="500" height="400"></canvas>
+    <canvas id="canvas" width="500" height="400" style="border:1px solid #000000;"></canvas>
     <p>Want to learn how to program?<a href="CSU-CS-FORM.html">Apply here for more information.</a></p>
     <script>
 
@@ -104,7 +105,7 @@
                  bangY = (this.y - 100) + 50,
                  hits = 0;
 
-                 //Loop used to check if a virus was hit
+                //Loop used to check if a virus was hit
                 for (i = 0; i < Viruses.length; i++) {
                     if (bangX > Viruses[i].getX() &&
                          bangX < Viruses[i].getX() + Viruses[i].getWidth() &&
@@ -167,6 +168,10 @@
 
             context.fillStyle = "white";
             context.fillRect(0, 0, this.canvas.width, this.canvas.height);
+            context.strokeStyle = "#000000";
+            context.linewidth = 2;
+            context.strokeRect = (0, 0, this.canvas.width, this.canvas.height);
+
         };
 
         function init() {
@@ -214,7 +219,7 @@
             context.drawImage(target, 0, 0, target.width, target.height, targetX - 50, targetY - 100,
                  100, 100);
 
-            window.requestAnimationFrame(start);//Used to continuously call the start function
+            window.requestAnimationFrame(start); //Used to continuously call the start function
         };
 
         // Start the process
