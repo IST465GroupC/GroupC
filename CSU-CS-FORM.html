@@ -8,7 +8,7 @@
     <img src="Images/CSUBanner.jpg" alt="CSU Banner" style="width: 500px; height: 150px; vertical-align: middle"/>
     <h2>Enter for a chance to win a $1,000 dollar scholarship!</h2>
     <h4>CSU Computer Science Application</h4>
-    <form name= "App" action="Applications.php" method="POST" onsubmit="return check()">
+    <form name= "App" action="Applications.php" method="POST" onsubmit="return validateForm()">
 <table>
 </tr>
 <tr>
@@ -60,13 +60,27 @@
 </table>
 </form>
 <script>
-    function check()  {  
-var empt = document.forms["App"]["first_name"].value;  
-if (empt == ""||empt==null)  
-{  
-alert("Please input a Value");  
-return false;
-    };
+    function validateForm() {
+        var x = document.forms["App"]["first_name"].value;
+        var y = document.forms["App"]["last_name"].value;
+        var z = document.forms["App"]["email"].value;
+        if (x == null || x == "") {
+            alert("First name must be filled out");
+            return false;
+        }
+        else if(y == null || y == "") {
+            alert("Last name must be filled out");
+            return false;
+        }
+        else if(z == null || z == "")
+        {
+            alert("Email must be filled out");
+            return false;
+        }
+        else
+        {
+            return true;
+        };
     };
 </script>
 </body>
