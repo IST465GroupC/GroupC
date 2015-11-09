@@ -6,6 +6,7 @@
         <title></title>
     </head>
     <body>
+        <p>
        <?php
 //$servername = "us-cdbr-azure-east-a.cloudapp.net";
 //$username = "bfeb7e31e89ee0";
@@ -35,5 +36,6 @@ $sql = "INSERT into as_93ca2a486ed92ff.applications (First, Last, Email, Telepho
 */
 mysql_close($conn);
 ?>
+            </p>
     </body>
 </html>
