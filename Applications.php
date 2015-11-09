@@ -19,7 +19,7 @@ if (!$conn) {
  echo('Connection failed: ' . mysql_error());
 }
  echo('Connected successfully'); 
-/*
+
 $first = $_POST['first_name'];
 $last = $_POST['last_name'];
 $email = $_POST['email'];
