@@ -31,6 +31,7 @@
             this.canvas = canvas; //assigns the canvas to keep virus images within
             this.hit = false;
 
+            //Function used to draw the virus
             this.draw = function (context, virus) {
                 if (this.hit === false) {
                     context.drawImage(virus, 0, 0,
@@ -40,6 +41,7 @@
                 }
                 return this;
             };
+            //Function used to move the virus
             this.move = function () {
                 this.x += Math.cos((Math.PI / 180) * (this.drctn)) * this.vel;
                 this.y -= Math.sin((Math.PI / 180) * (this.drctn)) * this.vel;
@@ -50,14 +52,14 @@
                     this.drctn -= 360;
                 }
             };
-
+            //Function used to prevent a virus from exceeding the canvas boundary
             this.checkCanvasBoundary = function () {
                 if (this.x + this.width > this.canvas.width ||
                this.x < 0) {
-                    this.drctn = 2 * 0 - this.drctn - 180;
+                    this.drctn -= 200;
                 } else if (this.y < 0 ||
                  this.y + this.height > this.canvas.height) {
-                    this.drctn = 2 * 90 - this.drctn - 180;
+                    this.drctn -= 100;
                 }
             };
 
@@ -96,12 +98,13 @@
             this.checkHits = function (Viruses) {
                 if (this.drawing === false) {
                     return 0;
-                }; //used to check against each bangframe is the drawing is true or not
+                }; //Used to check against each bangframe if the drawing is true or not
 
                 var bangX = (this.x - 50) + 50,
                  bangY = (this.y - 100) + 50,
                  hits = 0;
 
+                 //Loop used to check if a virus was hit
                 for (i = 0; i < Viruses.length; i++) {
                     if (bangX > Viruses[i].getX() &&
                          bangX < Viruses[i].getX() + Viruses[i].getWidth() &&
@@ -147,7 +150,7 @@
         };
 
         var bangs = [], context, canvas, viruses = [];
-
+        //Function used to load the images
         function loadSprite() {
             virus = new Image();
             virus.src = 'ComputerVirus6.png';
