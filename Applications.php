@@ -9,10 +9,6 @@
        <?php
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
-//$servername = "us-cdbr-azure-east-a.cloudapp.net";
-//$username = "bfeb7e31e89ee0";
-//$password = "85679ca6";
-//$dbName = "as_93ca2a486ed92ff";
 
 $first = $_POST['first_name'];
 $last = $_POST['last_name'];
@@ -36,39 +32,15 @@ echo "<br/>";
 $query = $sql->prepare('INSERT into applications (First, Last, Email, Telephone, Comments) VALUES (?, ?, ?, ?, ?)');
 $query->execute(array($first, $last, $email, $tele, $comments));
 
-
-//$query = $sql->prepare('SELECT * FROM applications');
-//$query->execute();
-
-//$result = $query->fetchAll();
-
-//print_r($result);
-
-//$conn = new mysqli_connect('us-cdbr-azure-east-a.cloudapp.net', 'bfeb7e31e89ee0', '85679ca6');
-//echo($conn);
-// Check connection
-//if (!$conn) {
-// echo('Connection failed: ' . mysql_error());
-//}
-// echo('Connected successfully'); 
-
-//$first = $_POST['first_name'];
-//$last = $_POST['last_name'];
-//$email = $_POST['email'];
-//$tele = $_POST['telephone'];
-//$comments = $_POST['comments'];
-
-//$sql = "INSERT into as_93ca2a486ed92ff.applications (First, Last, Email, Telephone, Comments) VALUES ('$first', '$last', '$email', '$tele', '$comments');";
-/*if (mysql_query($sql, $conn)) {
-    echo("New record created successfully") ;
-} else {
-    echo("Error: " . $sql . "<br>" . mysql_error($conn)) ;
-}
-*/
-//mysql_close($conn);
 ?>
+ <script type="text/javascript">
+   function closepopup()
+   {
+         window.close ();
+   }
+</script>
    <h1>Thank You!</h1>
    <h4>Thank you for your application submission! We look forward to contacting you about our Computer Science Program at Cleveland State University.</h4>
-   <h4>Click <a href="CSU-CS-HOME2.html">here</a> to return to our Computer Science homepage.</h4>
+   <h4>Click <a href="javascript: closepopup()">here</a> to return to our Computer Science homepage.</h4>
     </body>
 </html>
